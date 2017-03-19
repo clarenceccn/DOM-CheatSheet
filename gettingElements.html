@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Using Javascript to get document elements
+    </title>
+    <style>
+        #elem1 {
+            background-color: red;
+            font-size: 13pt;
+            border: 5px solid red;  /* border-width, border-style, border-color */
+        }
+
+        #elem2 {
+            background-color:  orange;
+            font-size: 20pt;
+        }
+
+        #elem3 {
+            background-color: yellow;
+            font-size: 15pt;
+
+        }
+
+        #resultContainer {
+            padding: 50px;
+            height: 500px;
+            width: 500px;
+            border: 20px dotted black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Practice dom elements -->
+    <p id="elem1"> I am element 1 </p>
+    <div id="elem2"> I am element 2 </div>
+    <input id="elem3" type="text" placeholder="Put some text" value="I am element 3">
+    <br>
+    <br>
+
+    <!-- Here is where your selected element will appear  -->
+    <div id="resultContainer">
+        <div id="result"> Here is the element you selected... </div>
+    </div>
+    <br>
+
+    <!-- Button to run javascript code to retrieve text inside various HTML elems  -->
+    <button type="button" id="button1"> Click for text inside Elem 1 </button>
+    <button type="button" id="button2" onclick="getElem('elem2')"> Click for text inside Elem 2</button>
+    <button type="button" id="button3" onclick="getElem('elem3')"> Click for text inside Elem 3</button>
+    <br>
+    <br>
+
+    <!-- Buttons to run javascript code to replace div#result with selected element -->
+    <button type="button" id="button4" onclick="replaceElem('elem1')"> Set To Elem 1 </button>
+    <button type="button" id="button5" onclick="replaceElem('elem2')"> Set To Elem 2</button>
+    <button type="button" id="button6" onclick="replaceElem('elem3')"> Set To Elem 3</button>
+    <br>
+    <br>
+
+    <!-- Buttons to run javascript code to replace div#result with selected element -->
+    <button type="button" id="button7" onclick="appendElem('elem1')"> Append Elem 1 </button>
+    <button type="button" id="button8" onclick="appendElem('elem2')"> Append Elem 2</button>
+    <button type="button" id="button9" onclick="appendElem('elem3')"> Append Elem 3</button>
+    <br>
+    <br>
+    <button type="button" id="button10" onclick="reset()"> RESET </button>
+
+    <!-- Magic happens here -->
+    <script> 
+        // Method to get element 1, setting onclick for button 1
+        document.getElementById("button1").onclick = function() {
+            document.getElementById("result").innerHTML = document.getElementById("elem1").textContent;
+        };
+
+        // Generalized way where method is set using HTML attribute onclick
+        function getElem(elem) {
+            if (document.getElementById(elem).textContent)
+                document.getElementById("result").innerHTML = document.getElementById(elem).textContent;
+            else 
+                document.getElementById("result").innerHTML = document.getElementById(elem).value;
+        };
+
+        // Method to set the innerHTML of result to the selected Element
+        function replaceElem(elem) {
+            var oldElem = document.getElementById("result").firstChild;
+            var elemToCopy = document.getElementById(elem);
+            var newElem = elemToCopy.cloneNode(true);
+            document.getElementById("result").replaceChild(newElem,oldElem);
+        };
+
+        // Methods to append selected Elements to results
+        function appendElem(elem) {
+            var oldElem = document.getElementById(elem);
+            var newElem = oldElem.cloneNode(true);
+            document.getElementById("result").appendChild(newElem);
+        }
+
+        function reset() {
+            document.getElementById("result").innerHTML = "";
+        }
+
+    </script>
+</body>
+</html>

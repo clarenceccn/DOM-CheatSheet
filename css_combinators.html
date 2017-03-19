@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> CSS Combinators </title>
+    <style>
+        div#main {
+            padding: 20px;
+            border:  2px solid blue;
+        }
+        div#elem {
+            padding: 20px;
+            border: 2px solid black;
+        }
+        div#legend {
+            margin: 20px;
+            vertical-align: bottom;
+            display: inline-block;
+            text-align: left;
+            padding: 20px;
+            border: 3px dotted orange;
+        }
+        button {
+            margin: 10px;
+            font-size: 15pt;
+        }
+        div#controls {
+            margin: 20px;
+            vertical-align: bottom;
+            display: inline-block;
+            width: 30%;
+            border: 3px dotted black;
+        }
+        div#descendant {
+            padding: 20px;
+            border: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <p>[P tag] Previous Sibling of Div</p>
+        <div id="elem">
+            <p>[P tag] Child 1 of Div </p>
+            <div id="descendant">
+                <p>
+                    [P tag] Child 1 of Div Descendant
+                </p>
+            </div>
+            <p>[P tag] Child 2 of Div </p>
+        </div>
+        <p>[P tag] Immediate Next Sibling of Div</p>
+        <p>[P tag] Next Sibling of Div</p>
+        <p>[P tag] Next Sibling of Div</p>
+        <p>[P tag] Next Sibling of Div</p>
+    </div>
+    <br>
+    <br>
+    <div id="legend">
+        <h1>Legend</h1>
+        <p> Blue Border = Main Display </p>
+        <p> Green Border = Main Display's Div Descendant </p>
+        <p> Black Border = P tags Relative to this Div </p>
+        <p> Yellow background Color = Selected P Tags </p>
+    </div>
+    <div id="controls">
+        <button type="button" id="button1" onclick="toggleGeneral()"> General Selector (Div ~ P)</button>
+        <button type="button" id="button2" onclick="toggleDescendant()"> Descendant Selector (Div P)</button>
+        <button type="button" id="button3" onclick="toggleChild()"> Child Selector (Div > P)</button>
+        <button type="button" id="button4" onclick="toggleAdjacent()"> Adjacent Selector (Div + P)</button>
+        <button type="button" id="button5" onclick="reset()"> Reset</button>
+    </div>
+    <br>
+    <script>
+        function reset() {
+            var p_tags = document.querySelectorAll("p");
+            for (i in p_tags)
+            {
+                p_tags[i].style = "";
+            }
+        }
+        function toggleDescendant() {
+            reset()
+            var elements = document.querySelectorAll("div#elem p");
+            for (i in elements)
+            {
+                elements[i].style.display = "block";
+                elements[i].style.backgroundColor = "yellow";
+                elements[i].style.border = "2px solid black";
+            }
+        }
+        function toggleChild() {
+            reset()
+            var elements = document.querySelectorAll("div#elem > p");
+            for (i in elements)
+            {
+                elements[i].style.display = "block";
+                elements[i].style.backgroundColor = "yellow";
+                elements[i].style.border = "2px solid black";
+            }
+        }
+        function toggleAdjacent() {
+            reset()
+            var elements = document.querySelectorAll("div#elem + p");
+            for (i in elements)
+            {
+                elements[i].style.display = "block";
+                elements[i].style.backgroundColor = "yellow";
+                elements[i].style.border = "2px solid black";
+            }
+        }
+        function toggleGeneral() {
+            reset()
+            var elements = document.querySelectorAll("div#elem ~ p");
+            for (i in elements)
+            {
+                elements[i].style.display = "block";
+                elements[i].style.backgroundColor = "yellow";
+                elements[i].style.border = "2px solid black";
+            }
+        }
+    </script>
+</body>
+</html>

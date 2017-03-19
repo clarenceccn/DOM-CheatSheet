@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        DOM Nodes
+    </title>
+    <style>
+        #info {
+            text-align: center;
+            padding: 20px;
+            border: 10px dotted orange;
+        }
+        #legend {
+            height: 200px;
+            width: 200px;
+            text-align: center;
+            padding: 10px;
+            border: 5px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="info">
+        <h1> Node Name </h1>
+        <h2> Node Type </h2>
+        <h3> Node Value </h3>
+    </div>
+    <br>
+    <div id="legend">
+        <h2>Node Type Legend</h2>
+        <p> 1 : Element Node </p>
+        <p> 2 : Attribute Node </p>
+        <p> 3 : Text Node </p>
+        <p> 8 : Comment Node </p>
+    </div>
+    <br>
+    <script>
+        var tags = ["div","p","b","ul","li","ol"]
+        for (i in tags)
+        {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.value = tags[i];
+            button.innerHTML = tags[i];
+            button.style.margin = "5px";
+            button.onclick = function() {
+                var nodes = document.getElementById("info").children;
+                nodes[0].innerHTML = "Node Name : " + document.createElement(this.value).nodeName;
+                nodes[1].innerHTML = "Node Type : " + document.createElement(this.value).nodeType;
+                nodes[2].innerHTML = "Node Value : " + document.createElement(this.value).nodeValue;
+            };
+            document.getElementsByTagName("body")[0].appendChild(button);
+        };
+    </script>
+</body>
+</html>
